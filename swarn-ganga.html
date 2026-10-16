@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Swarn Ganga Jewellers</title>
+<meta name="description" content="Swarn Ganga Jewellers, Gonda. Gold and silver jewellery, hallmarked, with clear bills and honest making charges.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500;600&display=swap">
+<style>
+/* Layout: sample notice, rate bar, sticky header, emerald hero with a jali lattice and an arched velvet display, trust strip, collections grid, wedding band, rate calculator, savings plan, buying steps, reviews, FAQ, visit block, footer. Floating WhatsApp button on every screen. */
+:root{
+  --bg:#FBF8F1; --surface:#FFFFFF; --ink:#18231F; --muted:#5B685F; --line:#E7DFCB; --tint:#F3EDDD;
+  --emerald:#0F3D33; --emerald-deep:#092A23; --emerald-ink:#F3EFE2; --emerald-muted:#B9CBC2;
+  --gold:#B8892B; --gold-text:#8A6416; --gold-light:#E8CB7A; --gold-ink:#241A05;
+  --ruby:#9B1B30; --wa:#128C4A; --wa-ink:#FFFFFF; --warn:#B3261E;
+  --foot-bg:#071F19; --foot-ink:#E6EFE9; --ok:#1E7A4F;
+  --font-display:"Cormorant Garamond","Georgia",serif;
+  --font-body:"Jost",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B1915; --surface:#12261F; --ink:#F1ECDD; --muted:#A9B5AD; --line:#284037; --tint:#173028;
+    --emerald:#0B2F27; --emerald-deep:#061E19; --gold:#D8B35A; --gold-text:#E1BF68; --wa:#1FA85C; --wa-ink:#04210F;
+    --foot-bg:#050F0C; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B1915; --surface:#12261F; --ink:#F1ECDD; --muted:#A9B5AD; --line:#284037; --tint:#173028;
+  --emerald:#0B2F27; --emerald-deep:#061E19; --gold:#D8B35A; --gold-text:#E1BF68; --wa:#1FA85C; --wa-ink:#04210F;
+  --foot-bg:#050F0C; color-scheme:dark;
+}
+*{box-sizing:border-box}
+.calc-in>*,.hero-in>*,.bridal-in>*,.plan-in>*,.visit-in>*,.fields>*{min-width:0}
+.fields{grid-template-columns:repeat(3,minmax(0,1fr))}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--font-display);font-weight:600;line-height:1.08;margin:0;text-wrap:balance;letter-spacing:-.005em}
+p{margin:0}
+a{color:inherit}
+button,input,select{font:inherit;color:inherit}
+[hidden]{display:none!important}
+.wrap{max-width:1200px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+@media (min-width:720px){.wrap{padding-left:max(28px,env(safe-area-inset-left,0px));padding-right:max(28px,env(safe-area-inset-right,0px))}}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.notice{background:var(--foot-bg);color:var(--foot-ink);text-align:center;font-size:13px;font-weight:500;padding:7px max(16px,env(safe-area-inset-right,0px)) 7px max(16px,env(safe-area-inset-left,0px))}
+
+.ratebar{background:var(--emerald-deep);color:var(--emerald-ink);border-bottom:1px solid rgba(232,203,122,.25)}
+.ratebar .wrap{display:flex;align-items:center;gap:10px 22px;flex-wrap:wrap;min-height:44px;padding-block:6px;font-size:14.5px}
+.ratebar .lbl{font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-size:12px;color:var(--gold-light)}
+.ratebar .r{display:inline-flex;gap:8px;align-items:baseline;white-space:nowrap}
+.ratebar .r b{font-variant-numeric:tabular-nums;font-weight:600;background:linear-gradient(100deg,#F7E3A1 20%,#fff 45%,#E8CB7A 60%,#F7E3A1 80%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 5s linear infinite}
+.ratebar .sm{color:var(--emerald-muted);font-size:12.5px;margin-left:auto}
+@keyframes shimmer{from{background-position:120% 0}to{background-position:-120% 0}}
+
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);transition:box-shadow .25s}
+header.top.sc{box-shadow:0 8px 24px rgba(8,30,24,.12)}
+.bar{display:flex;align-items:center;gap:14px;min-height:68px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;min-width:0}
+.brand .mk{flex:none;width:44px;height:44px;display:grid;place-items:center}
+.brand .mk img{width:44px;height:44px;object-fit:contain;border-radius:50%}
+.brand b{display:block;font-family:var(--font-display);font-weight:700;font-size:25px;line-height:1;letter-spacing:.005em;color:var(--emerald)}
+:root[data-theme="dark"] .brand b{color:var(--gold-light)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .brand b{color:var(--gold-light)}}
+.brand small{display:block;font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-text);font-weight:600;margin-top:3px}
+nav.main{display:flex;gap:2px;margin-left:auto}
+nav.main a{text-decoration:none;font-weight:500;font-size:15.5px;padding:9px 13px;border-radius:999px}
+nav.main a:hover{background:var(--tint)}
+@media (max-width:959px){nav.main{display:none}.bar .btn{margin-left:auto}}
+@media (max-width:479px){.brand small{letter-spacing:.2em}.brand b{font-size:22px}.bar .btn{padding:10px 14px;font-size:14.5px}}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:0;border-radius:999px;font-weight:600;font-size:16px;padding:14px 26px;text-decoration:none;cursor:pointer;line-height:1.2;white-space:nowrap;transition:transform .2s,filter .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn svg{width:20px;height:20px;fill:currentColor;flex:none}
+.btn-wa{background:var(--wa);color:var(--wa-ink)}
+.btn-wa:hover{filter:brightness(1.08);box-shadow:0 8px 20px rgba(18,140,74,.35)}
+.btn-gold{background:linear-gradient(135deg,#F1D688,#D3A83F 55%,#B8892B);color:var(--gold-ink)}
+.btn-gold:hover{box-shadow:0 8px 22px rgba(184,137,43,.45)}
+.btn-line{background:transparent;color:var(--emerald-ink);box-shadow:inset 0 0 0 1.5px rgba(232,203,122,.7)}
+.btn-line:hover{background:rgba(232,203,122,.12)}
+.btn-out{background:transparent;color:var(--emerald);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn-out:hover{box-shadow:inset 0 0 0 1.5px var(--gold)}
+:root[data-theme="dark"] .btn-out{color:var(--gold-light)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn-out{color:var(--gold-light)}}
+.btn-sm{padding:10px 18px;font-size:15px}
+
+.hero{position:relative;overflow:hidden;background:radial-gradient(120% 90% at 78% 40%,#16594A 0%,var(--emerald) 45%,var(--emerald-deep) 100%);color:var(--emerald-ink)}
+.hero::before{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cg fill='none' stroke='%23E8CB7A' stroke-opacity='.16' stroke-width='1'%3E%3Cpath d='M32 0l32 32-32 32L0 32z'/%3E%3Ccircle cx='32' cy='32' r='7'/%3E%3Cpath d='M32 14l18 18-18 18-18-18z'/%3E%3C/g%3E%3C/svg%3E");background-size:64px 64px;mask-image:linear-gradient(90deg,#000 0%,rgba(0,0,0,.35) 55%,#000 100%);-webkit-mask-image:linear-gradient(90deg,#000 0%,rgba(0,0,0,.35) 55%,#000 100%)}
+.hero-in{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding-block:56px 64px}
+@media (max-width:959px){.hero-in{grid-template-columns:1fr;gap:24px;padding-block:36px 48px}}
+.tag{display:inline-flex;align-items:center;gap:10px;color:var(--gold-light);font-weight:500;font-size:13.5px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:18px}
+.tag::before{content:"";width:34px;height:1.5px;background:var(--gold-light)}
+.hero h1{font-size:clamp(42px,6.6vw,82px);font-weight:600;margin-bottom:18px}
+.hero h1 em{font-style:italic;font-weight:500;background:linear-gradient(100deg,#F7E3A1,#E8CB7A 40%,#fff 55%,#E8CB7A 70%,#D3A83F);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 7s linear infinite}
+.hero .lead{color:var(--emerald-muted);font-size:19px;max-width:44ch;margin-bottom:28px}
+.hero .actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:30px}
+.facts{display:flex;flex-wrap:wrap;gap:10px 24px;font-size:15.5px}
+.facts span{display:inline-flex;align-items:center;gap:8px;color:var(--emerald-ink)}
+.facts svg{width:20px;height:20px;stroke:var(--gold-light);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+.display{position:relative;max-width:430px;width:100%;margin-inline:auto;filter:drop-shadow(0 24px 40px rgba(0,0,0,.45))}
+.display svg{display:block;width:100%;height:auto}
+.float-chip{position:absolute;background:var(--surface);color:var(--ink);border-radius:14px;padding:9px 14px;font-size:13.5px;font-weight:600;box-shadow:0 10px 24px rgba(0,0,0,.28);display:flex;gap:8px;align-items:center}
+.float-chip i{width:9px;height:9px;border-radius:50%;background:var(--ok)}
+.float-chip.c1{left:-6%;top:16%;animation:bob 6s ease-in-out infinite}
+.float-chip.c2{right:-4%;bottom:20%;animation:bob 7s ease-in-out -2s infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@media (max-width:959px){.display{max-width:320px}.float-chip.c1{left:-2%}.float-chip.c2{right:-2%}}
+.spark{transform-box:fill-box;transform-origin:center;animation:twinkle 3.2s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.15;transform:scale(.5) rotate(0)}50%{opacity:1;transform:scale(1) rotate(45deg)}}
+
+.trust{background:var(--surface);border-bottom:1px solid var(--line)}
+.trust-in{display:grid;grid-template-columns:repeat(4,1fr)}
+.tcell{display:flex;gap:14px;align-items:center;padding:22px 16px;border-left:1px solid var(--line);min-width:0}
+.tcell:first-child{border-left:0}
+.tcell .ico{flex:none;width:46px;height:46px;border-radius:50%;background:var(--tint);display:grid;place-items:center;color:var(--gold-text)}
+.tcell .ico svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.tcell b{display:block;font-weight:600;font-size:16px;line-height:1.2}
+.tcell span{color:var(--muted);font-size:14.5px;line-height:1.3;display:block}
+@media (max-width:959px){.trust-in{grid-template-columns:repeat(2,1fr)}.tcell:nth-child(3){border-left:0}.tcell:nth-child(n+3){border-top:1px solid var(--line)}}
+@media (max-width:519px){.tcell{padding:16px 10px;gap:10px}.tcell .ico{width:38px;height:38px}.tcell b{font-size:15px}.tcell span{font-size:13.5px}}
+
+section.sec{padding-block:72px}
+@media (max-width:719px){section.sec{padding-block:48px}}
+.head{max-width:60ch;margin-bottom:34px}
+.eyebrow{display:block;color:var(--gold-text);font-size:13px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;margin-bottom:12px}
+.head h2{font-size:clamp(32px,4.6vw,52px);color:var(--emerald);margin-bottom:12px}
+:root[data-theme="dark"] .head h2{color:var(--gold-light)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .head h2{color:var(--gold-light)}}
+.head p{color:var(--muted);font-size:18px}
+
+.coll-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:959px){.coll-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:559px){.coll-grid{grid-template-columns:1fr}}
+.coll{background:var(--surface);border:1px solid var(--line);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;min-width:0;transition:transform .3s,box-shadow .3s,border-color .3s}
+.coll:hover{transform:translateY(-6px);box-shadow:0 18px 36px rgba(15,61,51,.16);border-color:var(--gold)}
+.coll .art{aspect-ratio:5/4;background:radial-gradient(90% 80% at 50% 38%,#1D6454 0%,var(--emerald) 60%,var(--emerald-deep) 100%);position:relative;overflow:hidden;display:grid;place-items:center}
+.coll .art::before{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cg fill='none' stroke='%23E8CB7A' stroke-opacity='.14'%3E%3Cpath d='M24 0l24 24-24 24L0 24z'/%3E%3Ccircle cx='24' cy='24' r='5'/%3E%3C/g%3E%3C/svg%3E");background-size:48px 48px}
+.coll .art svg{position:relative;width:66%;height:auto;max-height:86%;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.coll:hover .art svg{transform:scale(1.08) rotate(-1.5deg)}
+.coll .body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:6px;flex:1}
+.coll h3{font-size:27px;color:var(--emerald)}
+:root[data-theme="dark"] .coll h3{color:var(--gold-light)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .coll h3{color:var(--gold-light)}}
+.coll p{color:var(--muted);font-size:16px;flex:1}
+.coll .btn{margin-top:12px;align-self:flex-start}
+
+.bridal{background:var(--emerald-deep);color:var(--emerald-ink);position:relative;overflow:hidden}
+.bridal::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 90% at 85% 50%,rgba(232,203,122,.16),transparent 70%)}
+.bridal-in{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+@media (max-width:859px){.bridal-in{grid-template-columns:1fr;gap:24px}}
+.bridal h2{font-size:clamp(34px,5vw,60px);color:#fff;margin-bottom:14px}
+.bridal h2 em{font-style:italic;font-weight:500;color:var(--gold-light)}
+.bridal p.l{color:var(--emerald-muted);font-size:18.5px;max-width:46ch;margin-bottom:22px}
+.ticks{list-style:none;margin:0 0 28px;padding:0;display:grid;gap:12px}
+.ticks li{display:flex;gap:12px;align-items:flex-start}
+.ticks svg{flex:none;width:22px;height:22px;margin-top:2px;stroke:var(--gold-light);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.bridal .vis{max-width:440px;margin-inline:auto;width:100%;filter:drop-shadow(0 22px 34px rgba(0,0,0,.4))}
+.bridal .vis svg{display:block;width:100%;height:auto}
+
+.calc-in{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:34px;align-items:start}
+@media (max-width:859px){.calc-in{grid-template-columns:minmax(0,1fr)}}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:26px;padding:26px;display:grid;gap:18px;box-shadow:0 16px 40px rgba(15,61,51,.08)}
+.fields{display:grid;gap:14px}
+@media (max-width:559px){.fields{grid-template-columns:minmax(0,1fr)}}
+.calc label{display:grid;gap:7px;font-weight:600;font-size:14.5px;color:var(--muted)}
+.calc input,.calc select{background:var(--bg);color:var(--ink);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;width:100%;min-width:0;font-weight:500;font-size:17px}
+.calc input:focus,.calc select:focus{border-color:var(--gold);outline:none}
+.out{border-radius:18px;background:linear-gradient(135deg,var(--emerald),var(--emerald-deep));color:var(--emerald-ink);padding:22px}
+.out .big{font-family:var(--font-display);font-weight:700;font-size:clamp(38px,6vw,54px);line-height:1;color:var(--gold-light);font-variant-numeric:tabular-nums}
+.out small{display:block;color:var(--emerald-muted);margin-top:4px}
+.rows{display:grid;gap:6px;margin-top:16px;font-size:15.5px}
+.rows div{display:flex;justify-content:space-between;gap:12px;font-variant-numeric:tabular-nums}
+.rows div span:first-child{color:var(--emerald-muted)}
+.note{color:var(--muted);font-size:14px}
+
+.plan{background:var(--tint)}
+.plan-in{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
+@media (max-width:859px){.plan-in{grid-template-columns:1fr}}
+.months{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:6px 0 20px}
+.months i{aspect-ratio:1;border-radius:12px;background:var(--surface);border:1px solid var(--line);display:grid;place-items:center;font-style:normal;font-weight:600;font-size:15px;color:var(--muted)}
+.months i.p{background:linear-gradient(135deg,#F1D688,#D3A83F);color:var(--gold-ink);border-color:transparent}
+.months i.g{background:var(--emerald);color:var(--gold-light);border-color:transparent}
+.pillrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.pill{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 16px;font-size:14.5px;font-weight:500}
+
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:s}
+@media (max-width:799px){.steps{grid-template-columns:1fr}}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:26px}
+.step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#F1D688,#C9A03C);color:var(--gold-ink);font-family:var(--font-display);font-weight:700;font-size:23px;margin-bottom:14px}
+.step h3{font-size:26px;margin-bottom:8px;color:var(--emerald)}
+:root[data-theme="dark"] .step h3{color:var(--gold-light)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .step h3{color:var(--gold-light)}}
+.step p{color:var(--muted)}
+
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:919px){.revs{grid-template-columns:1fr}}
+.rev{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:26px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.rev .st{color:var(--gold);font-size:20px;letter-spacing:3px}
+.rev q{quotes:none;font-family:var(--font-display);font-weight:500;font-size:24px;line-height:1.25;flex:1}
+.rev cite{font-style:normal;color:var(--muted);font-size:15px;font-weight:500}
+.ph{align-self:flex-start;font-size:12px;font-weight:600;color:var(--muted);border:1px dashed var(--line);border-radius:999px;padding:2px 10px}
+
+.faq{max-width:840px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:6px 20px;margin-bottom:10px;transition:border-color .2s}
+details[open]{border-color:var(--gold)}
+summary{cursor:pointer;font-weight:600;font-size:17.5px;padding:14px 0;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:26px;color:var(--gold-text);font-weight:400;line-height:1;transition:transform .25s;flex:none}
+details[open] summary::after{transform:rotate(45deg)}
+details p{color:var(--muted);padding:0 0 16px}
+
+.visit{background:var(--emerald);color:var(--emerald-ink)}
+.visit-in{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}
+@media (max-width:859px){.visit-in{grid-template-columns:1fr}}
+.visit h2{font-size:clamp(34px,5vw,56px);color:#fff;margin-bottom:16px}
+.visit dl{margin:0 0 24px;display:grid;grid-template-columns:auto 1fr;gap:12px 22px}
+.visit dt{color:var(--gold-light);font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:13px;padding-top:3px}
+.visit dd{margin:0;min-width:0}
+.shop{max-width:460px;margin-inline:auto;width:100%;filter:drop-shadow(0 20px 30px rgba(0,0,0,.35))}
+.shop svg{display:block;width:100%;height:auto}
+.visit .acts{display:flex;gap:12px;flex-wrap:wrap}
+
+footer.foot{background:var(--foot-bg);color:var(--foot-ink);padding-block:44px calc(104px + env(safe-area-inset-bottom,0px))}
+.foot-in{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:28px}
+@media (max-width:759px){.foot-in{grid-template-columns:1fr}}
+.foot b{font-family:var(--font-display);font-weight:700;font-size:28px;color:var(--gold-light);display:block;margin-bottom:6px}
+.foot h4{margin:0 0 10px;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-light)}
+.foot p,.foot a{color:#B6C6BD;font-size:15.5px}
+.foot a{display:block;text-decoration:none;padding:3px 0}
+.foot a:hover{color:#fff}
+.legal{margin-top:26px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12);font-size:13px;color:#8EA399}
+
+.wafloat{position:fixed;z-index:60;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));display:inline-flex;align-items:center;gap:10px;background:var(--wa);color:var(--wa-ink);text-decoration:none;font-weight:600;border-radius:999px;padding:14px 20px 14px 16px;box-shadow:0 12px 28px rgba(0,0,0,.35);transition:transform .2s}
+.wafloat:hover{transform:translateY(-3px)}
+.wafloat svg{width:24px;height:24px;fill:currentColor}
+@media (max-width:519px){.wafloat span{display:none}.wafloat{padding:15px}}
+
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@supports (animation-timeline: view()){
+  .rv{animation:rise linear both;animation-timeline:view();animation-range:entry 0% entry 38%}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv,.spark,.float-chip,.ratebar .r b,.hero h1 em{animation:none!important}
+  .coll,.coll .art svg,.btn,.wafloat{transition:none}
+  .ratebar .r b,.hero h1 em{background:none;color:var(--gold-light)}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FBEBB4"/><stop offset=".35" stop-color="#E2BB5C"/><stop offset=".7" stop-color="#B98A2A"/><stop offset="1" stop-color="#EAC970"/></linearGradient>
+    <linearGradient id="goldDeep" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9A7218"/><stop offset="1" stop-color="#5E430C"/></linearGradient>
+    <linearGradient id="silver" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FAFBFC"/><stop offset=".4" stop-color="#BCC4CC"/><stop offset=".75" stop-color="#8E99A4"/><stop offset="1" stop-color="#E6EBEF"/></linearGradient>
+    <radialGradient id="ruby" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#F27A8D"/><stop offset=".6" stop-color="#C21F3C"/><stop offset="1" stop-color="#7C1226"/></radialGradient>
+    <radialGradient id="emer" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#6FE0B2"/><stop offset=".6" stop-color="#17936B"/><stop offset="1" stop-color="#0A5A41"/></radialGradient>
+    <radialGradient id="pearl" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".6" stop-color="#EDE6D8"/><stop offset="1" stop-color="#B9B09C"/></radialGradient>
+    <linearGradient id="gem" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".5" stop-color="#BFE6F6"/><stop offset="1" stop-color="#F4FBFF"/></linearGradient>
+    <radialGradient id="velvet" cx=".5" cy=".35" r=".8"><stop offset="0" stop-color="#1F6F5C"/><stop offset=".6" stop-color="#0E3A31"/><stop offset="1" stop-color="#06201B"/></radialGradient>
+    <radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#F4D27A" stop-opacity=".55"/><stop offset="1" stop-color="#F4D27A" stop-opacity="0"/></radialGradient>
+  </defs>
+</svg>
+
+<div class="notice">Sample design. Rates, prices, offers, reviews and details are examples and will be replaced with your real information.</div>
+
+<div class="ratebar">
+  <div class="wrap">
+    <span class="lbl">Today's rate</span>
+    <span class="r">22K gold <b>₹11,460</b>/g</span>
+    <span class="r">24K gold <b>₹12,500</b>/g</span>
+    <span class="r">Silver <b>₹170</b>/g</span>
+    <span class="sm">Sample rates for design only</span>
+  </div>
+</div>
+
+<header class="top" id="hdr">
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Swarn Ganga Jewellers home">
+      <span class="mk" id="brandMark">
+        <svg viewBox="0 0 48 48" width="44" height="44" aria-hidden="true"><circle cx="24" cy="24" r="22.5" fill="#0F3D33" stroke="url(#gold)" stroke-width="2"/><path d="M24 9l9 10-9 20-9-20z" fill="none" stroke="url(#gold)" stroke-width="1.8" stroke-linejoin="round"/><path d="M15 19h18M20 19l4 20 4-20M19 14l5 5 5-5" fill="none" stroke="url(#gold)" stroke-width="1.2" stroke-linejoin="round"/><path d="M9 33c4-4 8 4 12 0s8 4 12 0 4-2 6-1" fill="none" stroke="#E8CB7A" stroke-width="1.6" stroke-linecap="round" opacity=".9"/></svg>
+      </span>
+      <span><b>Swarn Ganga</b><small>Jewellers</small></span>
+    </a>
+    <nav class="main" aria-label="Main">
+      <a href="#collections">Collections</a><a href="#wedding">Wedding</a><a href="#calculator">Price estimate</a><a href="#plan">Savings plan</a><a href="#faq">FAQ</a><a href="#visit">Visit</a>
+    </nav>
+    <a class="btn btn-wa btn-sm" href="#visit" data-wa="Hello Swarn Ganga Jewellers, I would like to know more about your jewellery.">WhatsApp us</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-in">
+      <div>
+        <span class="tag">Gold and silver, Gonda</span>
+        <h1>Jewellery your family can <em>trust.</em></h1>
+        <p class="lead">Hallmarked gold, honest making charges and a clear bill every time. Choose from classic and modern designs, or have yours made for the occasion.</p>
+        <div class="actions">
+          <a class="btn btn-gold" href="#collections">Explore collections</a>
+          <a class="btn btn-line" href="#" data-wa="Hello Swarn Ganga Jewellers, I would like to visit your showroom. What time is best?">Plan a showroom visit</a>
+        </div>
+        <div class="facts">
+          <span><svg viewBox="0 0 24 24"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>BIS hallmarked gold</span>
+          <span><svg viewBox="0 0 24 24"><path d="M3 12h13M12 6l6 6-6 6"/><path d="M21 4v16"/></svg>Old gold exchange</span>
+          <span><svg viewBox="0 0 24 24"><path d="M6 3h12l3 5-9 13L3 8z"/></svg>Clear, itemised bill</span>
+        </div>
+      </div>
+      <div class="display" id="heroArt" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <div class="trust">
+    <div class="wrap trust-in">
+      <div class="tcell"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span><div><b>BIS hallmarked</b><span>Purity you can check</span></div></div>
+      <div class="tcell"><span class="ico"><svg viewBox="0 0 24 24"><path d="M6 3h12l3 5-9 13L3 8z"/><path d="M3 8h18M9 3l-2 5 5 13 5-13-2-5"/></svg></span><div><b>Clear bill</b><span>Gold, making and tax listed</span></div></div>
+      <div class="tcell"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5l2-2v6h-6l2.2-2.2A5.5 5.5 0 1 0 17.5 14"/></svg></span><div><b>Exchange</b><span>Old gold at fair value</span></div></div>
+      <div class="tcell"><span class="ico"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg></span><div><b>Ask on WhatsApp</b><span>Designs and rates, fast</span></div></div>
+    </div>
+  </div>
+
+  <section class="sec" id="collections">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="eyebrow">Collections</span>
+        <h2>Find the piece for every occasion</h2>
+        <p>Tap a collection to ask for designs and today's price on WhatsApp.</p>
+      </div>
+      <div class="coll-grid" id="collGrid"></div>
+    </div>
+  </section>
+
+  <section class="sec bridal" id="wedding">
+    <div class="wrap bridal-in">
+      <div class="rv">
+        <span class="eyebrow" style="color:var(--gold-light)">Wedding collection</span>
+        <h2>Jewellery for the <em>most important day</em></h2>
+        <p class="l">Heavy bridal sets, mangalsutra and gifts for the family. Plan early, choose calmly and have every piece ready before the wedding.</p>
+        <ul class="ticks">
+          <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>Custom designs made to your budget and weight</li>
+          <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>Advance booking so rates are locked for you</li>
+          <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>Old gold exchange towards your new set</li>
+          <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>Family seating and time to decide, with no hurry</li>
+        </ul>
+        <a class="btn btn-gold" href="#" data-wa="Hello Swarn Ganga Jewellers, I would like to plan wedding jewellery. Can we fix a time to visit?">Plan wedding jewellery</a>
+      </div>
+      <div class="vis rv" id="bridalArt" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="calculator">
+    <div class="wrap calc-in">
+      <div class="head rv" style="margin-bottom:0">
+        <span class="eyebrow">Price estimate</span>
+        <h2>Know the approximate price before you visit</h2>
+        <p>Enter the weight and purity to see a quick estimate with making charges and tax. The final price is confirmed in the showroom on the day.</p>
+      </div>
+      <form class="calc rv" id="calc" onsubmit="return false">
+        <div class="fields">
+          <label for="gWt">Weight (grams)<input id="gWt" type="number" inputmode="decimal" min="0.1" max="1000" step="0.1" value="10"></label>
+          <label for="gPur">Purity<select id="gPur"><option value="22" selected>22K gold</option><option value="24">24K gold</option><option value="18">18K gold</option></select></label>
+          <label for="gMk">Making charge<select id="gMk"><option value="8">8%</option><option value="10" selected>10%</option><option value="12">12%</option><option value="15">15%</option></select></label>
+        </div>
+        <div class="out" aria-live="polite">
+          <div class="big" id="oTotal">₹0</div>
+          <small>Approximate total, including 3% tax</small>
+          <div class="rows">
+            <div><span>Gold value</span><span id="oGold">₹0</span></div>
+            <div><span>Making charge</span><span id="oMake">₹0</span></div>
+            <div><span>Tax (3%)</span><span id="oTax">₹0</span></div>
+          </div>
+        </div>
+        <p class="note">Estimate uses sample rates. Real rates change every day and we confirm them on WhatsApp.</p>
+        <a class="btn btn-wa" id="calcWa" href="#">Confirm today's price on WhatsApp</a>
+      </form>
+    </div>
+  </section>
+
+  <section class="sec plan" id="plan">
+    <div class="wrap plan-in">
+      <div class="rv">
+        <span class="eyebrow">Savings plan</span>
+        <h2 style="font-size:clamp(32px,4.6vw,52px);color:var(--emerald);margin-bottom:12px">Save a little every month, buy gold with a bonus</h2>
+        <p style="color:var(--muted);font-size:18px;margin-bottom:22px">Pay a fixed amount for 11 months. In the 12th month we add a benefit on your savings, and you choose any jewellery you like.</p>
+        <div class="months" aria-label="Plan timeline: 11 months of payment, then a bonus month">
+          <i class="p">1</i><i class="p">2</i><i class="p">3</i><i class="p">4</i><i class="p">5</i><i class="p">6</i>
+          <i class="p">7</i><i class="p">8</i><i class="p">9</i><i class="p">10</i><i class="p">11</i><i class="g">12</i>
+        </div>
+        <div class="pillrow"><span class="pill">Start from ₹1,000 a month</span><span class="pill">Choose any design</span><span class="pill">Bonus on the 12th month</span></div>
+        <a class="btn btn-gold" href="#" data-wa="Hello Swarn Ganga Jewellers, please tell me about your gold savings plan.">Ask about the plan</a>
+        <p class="note" style="margin-top:14px">Sample plan for design only. Your real terms will be shown here.</p>
+      </div>
+      <div class="rv" id="planArt" aria-hidden="true" style="max-width:420px;width:100%;margin-inline:auto"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="how">
+    <div class="wrap">
+      <div class="head rv"><span class="eyebrow">Buying with us</span><h2>Simple, clear and unhurried</h2></div>
+      <div class="steps">
+        <div class="step rv"><h3>Choose your designs</h3><p>Tell us the occasion and budget. We show you designs in the showroom, or send photos on WhatsApp first.</p></div>
+        <div class="step rv"><h3>See it weighed and checked</h3><p>The piece is weighed in front of you and the hallmark is shown, so you know exactly what you are buying.</p></div>
+        <div class="step rv"><h3>Get a clear bill</h3><p>Gold value, making charge and tax are written separately. No surprises at the counter.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0" id="reviews">
+    <div class="wrap">
+      <div class="head rv"><span class="eyebrow">Reviews</span><h2>What our customers say</h2><p>Your real Google reviews will appear here.</p></div>
+      <div class="revs">
+        <div class="rev rv"><span class="st" aria-label="5 out of 5 stars">★★★★★</span><q>Honest weight and a clear bill. They explained every charge before we bought.</q><cite>Priya S., wedding purchase</cite><span class="ph">Sample review</span></div>
+        <div class="rev rv"><span class="st" aria-label="5 out of 5 stars">★★★★★</span><q>We exchanged our old set and got a fair value. The new design is beautiful.</q><cite>Aman Y., exchange</cite><span class="ph">Sample review</span></div>
+        <div class="rev rv"><span class="st" aria-label="5 out of 5 stars">★★★★★</span><q>Sent a photo on WhatsApp and got the price the same day. Very easy.</q><cite>Rohit K., gift for family</cite><span class="ph">Sample review</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0" id="faq">
+    <div class="wrap">
+      <div class="head rv"><span class="eyebrow">Questions</span><h2>Things people often ask</h2></div>
+      <div class="faq rv">
+        <details><summary>Is your gold hallmarked?</summary><p>Yes. Gold jewellery carries the BIS hallmark, and we show it to you at the time of purchase.</p></details>
+        <details><summary>How are making charges decided?</summary><p>Making charges depend on the design. We tell you the percentage before you buy, and it is written separately on your bill.</p></details>
+        <details><summary>Can I exchange my old gold?</summary><p>Yes. We weigh and test your old gold in front of you and adjust its value against your new purchase.</p></details>
+        <details><summary>Can I get the price without visiting?</summary><p>Yes. Send the design or weight on WhatsApp and we will share today's approximate price. The final price is confirmed in the showroom.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec visit" id="visit">
+    <div class="wrap visit-in">
+      <div class="rv">
+        <span class="eyebrow" style="color:var(--gold-light)">Visit us</span>
+        <h2>Come, sit and see it in person</h2>
+        <dl>
+          <dt>Address</dt><dd>Main Bazaar, Gonda, UP 271001</dd>
+          <dt>Timing</dt><dd>Monday to Saturday, 10:30 AM to 8:30 PM</dd>
+          <dt>Phone</dt><dd>+91 90000 00000</dd>
+          <dt>WhatsApp</dt><dd>+91 90000 00000</dd>
+        </dl>
+        <div class="acts">
+          <a class="btn btn-wa" href="#" data-wa="Hello Swarn Ganga Jewellers, I would like to visit. Please share the location.">Message on WhatsApp</a>
+          <a class="btn btn-line" href="#collections">See collections</a>
+        </div>
+      </div>
+      <div class="shop rv" id="shopArt" aria-hidden="true"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-in">
+      <div><b>Swarn Ganga Jewellers</b><p>Gold and silver jewellery in Gonda. Hallmarked, clearly priced and made with care.</p></div>
+      <div><h4>Explore</h4><a href="#collections">Collections</a><a href="#wedding">Wedding</a><a href="#calculator">Price estimate</a><a href="#faq">Questions</a></div>
+      <div><h4>Visit</h4><p>Main Bazaar, Gonda, UP 271001<br>Monday to Saturday<br>10:30 AM to 8:30 PM</p></div>
+    </div>
+    <p class="legal">Sample design. All rates, prices, offers and details shown are examples only.</p>
+  </div>
+</footer>
+
+<a class="wafloat" href="#" data-wa="Hello Swarn Ganga Jewellers, I would like to know more about your jewellery." aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A11 11 0 0 0 3.3 17.2L2 22l4.9-1.3A11 11 0 1 0 20.5 3.5zM12 20a8.9 8.9 0 0 1-4.5-1.2l-.3-.2-2.9.8.8-2.8-.2-.3A9 9 0 1 1 12 20zm5-6.7c-.3-.1-1.6-.8-1.9-.9s-.5-.1-.7.1-.8.9-.9 1.1-.3.2-.6.1a7.3 7.3 0 0 1-3.6-3.1c-.3-.5.3-.5.8-1.5a.6.6 0 0 0 0-.5c-.1-.1-.7-1.6-.9-2.2s-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.7 6.4 6.4 0 0 0 1.4 3.4 14.7 14.7 0 0 0 5.6 4.9c2.1.9 2.1.6 2.5.6a2.1 2.1 0 0 0 1.4-1c.2-.5.2-.9.1-1s-.3-.2-.6-.3z"/></svg>
+  <span>Chat on WhatsApp</span>
+</a>
+
+<script>
+var PHONE = "";      /* Showroom WhatsApp number, e.g. 919XXXXXXXXX. Empty = WhatsApp asks whom to message. */
+var LOGO_SRC = "";   /* Optional: path or data URI of the real logo. When set, it replaces the drawn mark. */
+var RATES = {24:12500, 22:11460, 18:9375};   /* sample rates per gram */
+
+function waUrl(t){ return "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(t); }
+function inr(n){ return "₹" + Math.round(n).toLocaleString("en-IN"); }
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;"); }
+
+/* ---------- jewellery art (original SVG drawings) ---------- */
+function bez(t,a,b,c){ var u=1-t; return [u*u*a[0]+2*u*t*b[0]+t*t*c[0], u*u*a[1]+2*u*t*b[1]+t*t*c[1]]; }
+function sparkle(x,y,s,d){ return '<g transform="translate('+x+' '+y+') scale('+s+')"><path class="spark" style="animation-delay:'+d+'s" d="M0-10C1-3 3-1 10 0 3 1 1 3 0 10-1 3-3 1-10 0-3-1-1-3 0-10z" fill="#FFF6D6"/></g>'; }
+
+function necklace(o){
+  o = o || {};
+  var A=[26,12], B=[120,238], C=[214,12], out='';
+  var chain = o.silver ? 'url(#silver)' : 'url(#gold)';
+  out += '<path d="M'+A[0]+' '+A[1]+' Q'+B[0]+' '+B[1]+' '+C[0]+' '+C[1]+'" fill="none" stroke="'+chain+'" stroke-width="'+(o.black?3:4.5)+'" stroke-linecap="round"/>';
+  var i, p, n=0;
+  for (i=0.1;i<=0.91;i+=0.06){
+    p = bez(i,A,B,C); n++;
+    if (o.black){
+      out += '<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="3.4" fill="#1A1613"/><circle cx="'+(p[0]-1).toFixed(1)+'" cy="'+(p[1]-1).toFixed(1)+'" r="1" fill="#fff" opacity=".5"/>';
+    } else if (o.silver){
+      out += '<ellipse cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" rx="5" ry="3" transform="rotate('+(n%2?35:-35)+' '+p[0].toFixed(1)+' '+p[1].toFixed(1)+')" fill="none" stroke="url(#silver)" stroke-width="2"/>';
+    } else {
+      out += '<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="5.2" fill="url(#gold)" stroke="url(#goldDeep)" stroke-width=".6"/>';
+      if (n%2===0) out += '<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="2.6" fill="'+(n%4===0?'url(#ruby)':'url(#emer)')+'"/>';
+    }
+  }
+  var f = o.silver ? 'url(#silver)' : 'url(#gold)';
+  out += '<circle cx="120" cy="124" r="4.5" fill="'+f+'"/>';
+  out += '<path d="M120 128C98 138 94 166 120 190 146 166 142 138 120 128z" fill="'+f+'" stroke="url(#goldDeep)" stroke-width="1.2"/>';
+  if (o.silver){
+    out += '<circle cx="120" cy="156" r="14" fill="none" stroke="#6F7A85" stroke-width="1.4"/><circle cx="120" cy="156" r="6" fill="url(#pearl)"/>';
+  } else {
+    out += '<path d="M120 142C108 148 106 164 120 176 134 164 132 148 120 142z" fill="url(#ruby)"/><path d="M114 150c2-3 5-4 8-3" stroke="#fff" stroke-opacity=".6" stroke-width="1.6" fill="none" stroke-linecap="round"/>';
+    out += '<circle cx="120" cy="198" r="6" fill="url(#pearl)"/><path d="M120 190v2" stroke="url(#goldDeep)" stroke-width="2"/>';
+  }
+  return out;
+}
+function jhumke(){
+  function one(x){
+    var s='';
+    s += '<circle cx="'+x+'" cy="16" r="9" fill="url(#gold)" stroke="url(#goldDeep)" stroke-width=".8"/><circle cx="'+x+'" cy="16" r="4" fill="url(#ruby)"/>';
+    s += '<path d="M'+x+' 25v14" stroke="url(#gold)" stroke-width="3"/>';
+    s += '<path d="M'+(x-28)+' 92C'+(x-28)+' 60 '+(x-14)+' 40 '+x+' 40S'+(x+28)+' 60 '+(x+28)+' 92z" fill="url(#gold)" stroke="url(#goldDeep)" stroke-width="1.2"/>';
+    s += '<path d="M'+(x-18)+' 88C'+(x-18)+' 66 '+(x-8)+' 52 '+x+' 50" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="2.4" stroke-linecap="round"/>';
+    var k; for (k=-20;k<=20;k+=10) s += '<circle cx="'+(x+k)+'" cy="92" r="5.2" fill="url(#gold)" stroke="url(#goldDeep)" stroke-width=".8"/>';
+    s += '<circle cx="'+x+'" cy="66" r="4.4" fill="url(#ruby)"/><circle cx="'+(x-12)+'" cy="76" r="3.4" fill="url(#emer)"/><circle cx="'+(x+12)+'" cy="76" r="3.4" fill="url(#emer)"/>';
+    for (k=-16;k<=16;k+=16){ s += '<path d="M'+(x+k)+' 97v14" stroke="url(#gold)" stroke-width="1.6"/><circle cx="'+(x+k)+'" cy="116" r="5.6" fill="url(#pearl)"/>'; }
+    return s;
+  }
+  return one(56) + one(164);
+}
+function ring(){
+  var s='';
+  s += '<ellipse cx="100" cy="132" rx="52" ry="46" fill="none" stroke="url(#gold)" stroke-width="13"/>';
+  s += '<ellipse cx="100" cy="132" rx="52" ry="46" fill="none" stroke="url(#goldDeep)" stroke-width="1" opacity=".6"/>';
+  s += '<path d="M62 112c8-22 24-30 38-30" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2.4" stroke-linecap="round"/>';
+  s += '<path d="M78 84l-6-10M122 84l6-10M100 82v-8" stroke="url(#goldDeep)" stroke-width="3" stroke-linecap="round"/>';
+  s += '<path d="M80 56h40l12 16-32 36-32-36z" transform="translate(0 -4)" fill="url(#gem)" stroke="#8CC6DE" stroke-width="1.4" stroke-linejoin="round"/>';
+  s += '<path d="M80 52h40M88 52l-8 16 20 36M112 52l8 16-20 36M80 68h40M100 52l-8 16 8 36 8-36z" transform="translate(0 0)" fill="none" stroke="#8CC6DE" stroke-width="1" stroke-linejoin="round" opacity=".9" />';
+  s += sparkle(132,48,1.1,0) + sparkle(72,50,.8,1.4);
+  return s;
+}
+function bangles(){
+  var s='', i, cx=[80,110,140], k;
+  for (i=0;i<cx.length;i++){
+    s += '<circle cx="'+cx[i]+'" cy="100" r="66" fill="none" stroke="url(#gold)" stroke-width="13"/>';
+    s += '<circle cx="'+cx[i]+'" cy="100" r="66" fill="none" stroke="url(#goldDeep)" stroke-width="2.6" stroke-dasharray="1.5 7" stroke-linecap="round"/>';
+  }
+  s += '<circle cx="110" cy="100" r="66" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="2" stroke-dasharray="40 300" transform="rotate(-70 110 100)"/>';
+  for (k=0;k<5;k++){ var a=(-60+k*30)*Math.PI/180; s += '<circle cx="'+(140+66*Math.cos(a)).toFixed(1)+'" cy="'+(100+66*Math.sin(a)).toFixed(1)+'" r="4.6" fill="'+(k%2?'url(#emer)':'url(#ruby)')+'" stroke="url(#goldDeep)" stroke-width="1"/>'; }
+  s += sparkle(190,38,.9,.6);
+  return s;
+}
+function silverChain(){
+  var A=[30,14], B=[120,200], C=[210,14], s='', i, n=0, p;
+  for (i=0.04;i<=0.97;i+=0.05){ p=bez(i,A,B,C); n++; s += '<ellipse cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" rx="7.5" ry="4.2" transform="rotate('+(n%2?42:-42)+' '+p[0].toFixed(1)+' '+p[1].toFixed(1)+')" fill="none" stroke="url(#silver)" stroke-width="2.6"/>'; }
+  s += '<circle cx="120" cy="125" r="24" fill="url(#silver)" stroke="#6F7A85" stroke-width="1.4"/><circle cx="120" cy="125" r="16" fill="none" stroke="#6F7A85" stroke-width="1.2"/><path d="M120 112l4 9h9l-7 6 3 9-9-5-9 5 3-9-7-6h9z" fill="#E9EDF1" stroke="#6F7A85" stroke-width=".8"/>';
+  s += sparkle(176,100,.8,.3);
+  return s;
+}
+function wrap(vb, inner){ return '<svg viewBox="'+vb+'" role="img" aria-hidden="true">'+inner+'</svg>'; }
+
+var ART = {
+  haar: function(){ return wrap('0 0 240 214', necklace({}) + sparkle(40,110,.8,.2) + sparkle(204,90,.9,1.2)); },
+  ring: function(){ return wrap('0 0 200 190', ring()); },
+  kangan: function(){ return wrap('0 0 220 200', bangles()); },
+  jhumke: function(){ return wrap('0 0 220 130', jhumke() + sparkle(110,60,.9,.5)); },
+  mangal: function(){ return wrap('0 0 240 214', necklace({black:true}) + sparkle(190,150,.8,.8)); },
+  silver: function(){ return wrap('0 0 240 170', silverChain()); }
+};
+
+function heroArt(){
+  var s = '';
+  s += '<path d="M24 556V204A186 186 0 0 1 396 204V556z" fill="url(#velvet)" stroke="url(#gold)" stroke-width="4"/>';
+  s += '<path d="M44 556V206A166 166 0 0 1 376 206V556z" fill="none" stroke="#E8CB7A" stroke-opacity=".5" stroke-width="1.4" stroke-dasharray="3 7"/>';
+  s += '<ellipse cx="210" cy="260" rx="170" ry="170" fill="url(#glow)"/>';
+  s += '<g transform="translate(48 96) scale(1.35)">' + necklace({}) + '</g>';
+  s += '<g transform="translate(106 404) scale(.92)">' + jhumke() + '</g>';
+  s += sparkle(70,200,1.3,0) + sparkle(352,170,1.1,1) + sparkle(318,390,1.2,.5) + sparkle(96,330,.9,1.6) + sparkle(210,70,1,2.1);
+  return wrap('0 0 420 560', s);
+}
+function bridalArt(){
+  var s = '';
+  s += '<rect x="10" y="10" width="420" height="500" rx="28" fill="url(#velvet)" stroke="url(#gold)" stroke-width="3"/>';
+  s += '<ellipse cx="220" cy="230" rx="190" ry="190" fill="url(#glow)"/>';
+  s += '<g transform="translate(40 60) scale(1.5)">' + necklace({}) + '</g>';
+  s += '<g transform="translate(110 380) scale(1)">' + jhumke() + '</g>';
+  s += sparkle(70,90,1.2,0) + sparkle(372,120,1,.9) + sparkle(360,400,1.3,.4) + sparkle(78,420,.9,1.7);
+  return wrap('0 0 440 520', s);
+}
+function planArt(){
+  var s = '';
+  s += '<rect x="20" y="30" width="360" height="330" rx="28" fill="url(#velvet)" stroke="url(#gold)" stroke-width="3"/>';
+  s += '<ellipse cx="200" cy="200" rx="150" ry="140" fill="url(#glow)"/>';
+  s += '<g transform="translate(110 64) scale(.62)">' + bangles() + '</g>';
+  s += '<g transform="translate(120 176) scale(.8)">' + '<path d="M0 90h30l20 40 28-70 28 90 30-60h30" fill="none" stroke="#E8CB7A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".0"/>' + '</g>';
+  s += '<text x="200" y="262" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="56" font-weight="700" fill="#F3D88A">11 + 1</text>';
+  s += '<text x="200" y="298" text-anchor="middle" font-family="Jost, sans-serif" font-size="15" letter-spacing="4" fill="#B9CBC2">MONTHS OF SAVING</text>';
+  s += '<text x="200" y="326" text-anchor="middle" font-family="Jost, sans-serif" font-size="13" letter-spacing="3" fill="#B9CBC2">AND A BONUS MONTH</text>';
+  s += sparkle(64,80,1.1,0) + sparkle(338,96,1,1.2) + sparkle(330,320,1.1,.6);
+  return wrap('0 0 400 390', s);
+}
+function shopArt(){
+  var s = '';
+  s += '<rect x="30" y="170" width="360" height="270" fill="#0A2D26" stroke="url(#gold)" stroke-width="3"/>';
+  s += '<path d="M10 176h400l-30-70H40z" fill="#0F3D33" stroke="url(#gold)" stroke-width="3" stroke-linejoin="round"/>';
+  s += '<path d="M40 106l20 70M100 106l8 70M160 106l3 70M220 106v70M280 106l-3 70M340 106l-8 70M380 106l-20 70" stroke="#E8CB7A" stroke-opacity=".4" stroke-width="2"/>';
+  s += '<rect x="86" y="46" width="248" height="52" rx="10" fill="#071F19" stroke="url(#gold)" stroke-width="2.4"/>';
+  s += '<text x="210" y="82" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="30" font-weight="700" fill="#F3D88A" letter-spacing=".5">Swarn Ganga</text>';
+  s += '<path d="M70 440V260a44 44 0 0 1 88 0v180z" fill="url(#velvet)" stroke="url(#gold)" stroke-width="2.4"/>';
+  s += '<path d="M262 440V260a44 44 0 0 1 88 0v180z" fill="url(#velvet)" stroke="url(#gold)" stroke-width="2.4"/>';
+  s += '<g transform="translate(78 266) scale(.32)">' + necklace({}) + '</g>';
+  s += '<g transform="translate(272 276) scale(.34)">' + jhumke() + '</g>';
+  s += '<rect x="176" y="270" width="68" height="170" rx="6" fill="#071F19" stroke="url(#gold)" stroke-width="2"/><circle cx="234" cy="360" r="4" fill="url(#gold)"/>';
+  s += sparkle(112,230,.9,0) + sparkle(306,236,.9,1.1);
+  s += '<rect x="0" y="440" width="420" height="10" fill="#06201B"/>';
+  return wrap('0 0 420 456', s);
+}
+
+/* ---------- build page ---------- */
+document.getElementById("heroArt").innerHTML = heroArt() +
+  '<div class="float-chip c1"><i></i>BIS hallmarked</div><div class="float-chip c2"><i></i>Clear bill</div>';
+document.getElementById("bridalArt").innerHTML = bridalArt();
+document.getElementById("planArt").innerHTML = planArt();
+document.getElementById("shopArt").innerHTML = shopArt();
+
+var COLL = [
+  {n:"Necklaces and Haar", d:"Classic gold haar and chains for weddings, festivals and gifting.", a:"haar", m:"necklaces and haar"},
+  {n:"Rings", d:"Daily wear, engagement and couple rings in gold with stones.", a:"ring", m:"rings"},
+  {n:"Bangles and Kangan", d:"Plain, carved and stone-set kangan, singly or as full sets.", a:"kangan", m:"bangles and kangan"},
+  {n:"Earrings and Jhumke", d:"Jhumke, studs and drops, from light daily pairs to bridal.", a:"jhumke", m:"earrings and jhumke"},
+  {n:"Mangalsutra", d:"Traditional and modern mangalsutra with black beads and gold.", a:"mangal", m:"mangalsutra"},
+  {n:"Silver", d:"Chains, payal and gift items in pure silver.", a:"silver", m:"silver jewellery"}
+];
+document.getElementById("collGrid").innerHTML = COLL.map(function(c){
+  var msg = "Hello Swarn Ganga Jewellers, please show me designs in " + c.m + " and today's price.";
+  return '<article class="coll rv"><div class="art">' + ART[c.a]() + '</div><div class="body"><h3>' + esc(c.n) + '</h3><p>' + esc(c.d) + '</p><a class="btn btn-out btn-sm" href="#" data-wa="' + esc(msg) + '">Ask for designs</a></div></article>';
+}).join("");
+
+/* optional real logo */
+if (LOGO_SRC) { document.getElementById("brandMark").innerHTML = '<img src="' + LOGO_SRC + '" alt="Swarn Ganga Jewellers logo">'; }
+
+/* ---------- price estimate ---------- */
+function calc(){
+  var g = parseFloat(document.getElementById("gWt").value);
+  var pur = document.getElementById("gPur").value;
+  var mk = parseFloat(document.getElementById("gMk").value);
+  if (!(g > 0)) g = 0;
+  var gold = g * RATES[pur], make = gold * mk / 100, tax = (gold + make) * 0.03, total = gold + make + tax;
+  document.getElementById("oGold").textContent = inr(gold);
+  document.getElementById("oMake").textContent = inr(make);
+  document.getElementById("oTax").textContent = inr(tax);
+  document.getElementById("oTotal").textContent = inr(total);
+  var msg = "Hello Swarn Ganga Jewellers, I would like today's exact price for " + g + " g of " + pur + "K gold with " + mk + "% making charge. The website estimate was about " + inr(total) + ".";
+  document.getElementById("calcWa").setAttribute("href", waUrl(msg));
+}
+["gWt","gPur","gMk"].forEach(function(id){ document.getElementById(id).addEventListener("input", calc); document.getElementById(id).addEventListener("change", calc); });
+calc();
+
+/* ---------- WhatsApp links ---------- */
+document.querySelectorAll("[data-wa]").forEach(function(a){
+  a.setAttribute("href", waUrl(a.getAttribute("data-wa"))); a.setAttribute("target","_blank"); a.setAttribute("rel","noopener");
+});
+document.getElementById("calcWa").setAttribute("target","_blank");
+document.getElementById("calcWa").setAttribute("rel","noopener");
+
+/* header shadow on scroll */
+var hdr = document.getElementById("hdr");
+function onScroll(){ hdr.classList.toggle("sc", window.scrollY > 8); }
+window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+</script>
+</body>
+</html>
